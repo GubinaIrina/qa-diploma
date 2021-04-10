@@ -21,21 +21,6 @@ public class PaymentPage {
     private SelenideElement continueButton = $$("button").find(text("Продолжить"));
     private SelenideElement notification = $(".notification_status_ok");
     private SelenideElement errorNotification = $(".notification_status_error");
-    private SelenideElement invalidFormatNotification = $$(".input__sub").find(text("Неверный формат"));
-    private SelenideElement fieldRequiredNotification = $$(".input__sub")
-            .find(text("Поле обязательно для заполнения"));
-    private SelenideElement cardExpiredNotification = $$(".input__sub")
-            .find(text("Истёк срок действия карты"));
-    private SelenideElement fullNameNotification = $$(".input__sub")
-            .find(text("Введите полное имя и фамилию"));
-    private SelenideElement fieldSymbolRestrictionNotification = $$(".input__sub")
-            .find(text("Значение поля не может содержать более 100 символов"));
-    private SelenideElement fieldCanOnlyContainLettersNotification = $$(".input__sub")
-            .find(text("Значение поля может содержать только буквы и дефис"));
-    private SelenideElement fieldMustContainMoreThanOneLetterNotification = $$(".input__sub")
-            .find(text("Значение поля должно содержать больше одной буквы"));
-    private SelenideElement fieldMustContainThreeDigitNotification = $$(".input__sub")
-            .find(text("Значение поля должно содержать 3 цифры"));
 
     public PaymentPage() {
         fieldset.shouldBe(visible);
@@ -59,38 +44,42 @@ public class PaymentPage {
     }
 
     public void getInvalidFormatNotification() {
-        invalidFormatNotification.shouldBe(visible);
+        $$(".input__sub").find(text("Неверный формат")).shouldBe(visible);
     }
 
     public void getFieldRequiredNotification() {
-        fieldRequiredNotification.shouldBe(visible);
+        $$(".input__sub").find(text("Поле обязательно для заполнения")).shouldBe(visible);
     }
 
     public void getCardExpiredNotification() {
-        cardExpiredNotification.shouldBe(visible);
+        $$(".input__sub").find(text("Истёк срок действия карты")).shouldBe(visible);
     }
 
     public void getFullNameNotification() {
-        fullNameNotification.shouldBe(visible);
+        $$(".input__sub").find(text("Введите полное имя и фамилию")).shouldBe(visible);
     }
 
     public void getFieldSymbolRestrictionNotification() {
-        fieldSymbolRestrictionNotification.shouldBe(visible);
+        $$(".input__sub").find(text("Значение поля не может содержать более 100 символов")).shouldBe(visible);
     }
 
     public void getFieldCanOnlyContainLettersNotification() {
-        fieldCanOnlyContainLettersNotification.shouldBe(visible);
+        $$(".input__sub").find(text("Значение поля может содержать только буквы и дефис")).shouldBe(visible);
     }
 
     public void getFieldMustContainMoreThanOneLetterNotification() {
-        fieldMustContainMoreThanOneLetterNotification.shouldBe(visible);
+        $$(".input__sub").find(text("Значение поля должно содержать больше одной буквы")).shouldBe(visible);
     }
 
     public void getFieldMustContainThreeDigitNotification() {
-        fieldMustContainThreeDigitNotification.shouldBe(visible);
+        $$(".input__sub").find(text("Значение поля должно содержать 3 цифры")).shouldBe(visible);
     }
 
     public void getAllFieldsAreRequired() {
         $$(".input__sub").shouldHave(CollectionCondition.size(5)).find(text("Поле обязательно для заполнения"));
+    }
+
+    public void getDeadlineIncorrectlyNotification() {
+        $$(".input__sub").find(text("Неверно указан срок действия карты")).shouldBe(visible);
     }
 }

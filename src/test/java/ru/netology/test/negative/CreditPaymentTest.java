@@ -58,7 +58,7 @@ public class CreditPaymentTest {
     }
 
     //Поле "Месяц"
-    //TODO:баг ошибку не выдает
+    //TODO: надпись под полем "Месяц" должно содержать текст: "Неверно указан срок действия карты"
     @Test
     void notBuyInvalidMonth() {
         Card card = new Card(getApprovedNumber(), "00", getFutureYear(), getValidName(), getValidCVC());
@@ -67,7 +67,7 @@ public class CreditPaymentTest {
         paymentPage.getFieldRequiredNotification();
     }
 
-    //TODO:баг не та ошибка
+    //TODO: Надпись под полем "Месяц" должно содержать текст: "Поле обязательно для заполнения"
     @Test
     void notBuyEmptyMonth() {
         Card card = new Card(getApprovedNumber(), "", getFutureYear(), getValidName(), getValidCVC());
@@ -76,13 +76,12 @@ public class CreditPaymentTest {
         paymentPage.getFieldRequiredNotification();
     }
 
-    //TODO: ошибочным подсвечено только поле "год"
     @Test
     void notBuyCardExpired() {
-        Card card = new Card(getApprovedNumber(), getLastMonth(), getLastYear(), getValidName(), getValidCVC());
+        Card card = new Card(getApprovedNumber(), getLastMonth(), getCurrentYear(), getValidName(), getValidCVC());
         val paymentPage = new PaymentPage();
         paymentPage.fullData(card);
-        paymentPage.getCardExpiredNotification();
+        paymentPage.getDeadlineIncorrectlyNotification();
     }
 
     //Поле "Год"
@@ -94,7 +93,7 @@ public class CreditPaymentTest {
         paymentPage.getCardExpiredNotification();
     }
 
-    //баг не та ошибка
+    //TODO: Надпись под полем "Год" должна содержать текст "Поле обязательно для заполнения"
     @Test
     void notBuyEmptyFieldYear() {
         Card card = new Card(getApprovedNumber(), getNextMonth(), "", getValidName(), getValidCVC());
@@ -226,7 +225,4 @@ public class CreditPaymentTest {
         paymentPage.fullData(card);
         paymentPage.getAllFieldsAreRequired();
     }
-
-
-
 }

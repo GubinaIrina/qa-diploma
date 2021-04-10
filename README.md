@@ -2,8 +2,8 @@
 
 1. Склонировать проект из репозитория командой ```git clone ```
 1. Открыть склонированный проект в IDEA
-1. Для запуска контейнеров с MySql, PostgresSQL, и Node.js в терминале ввести команду ```docker-compose up -d --
-   force-recreate```
+1. Для запуска контейнеров с MySql, PostgresSQL, и Node.js в терминале ввести команду ```docker-compose up 
+   -d --force-recreate```
 1. Запуск SUT:
 - для MySql в терминале ввести команду:
 

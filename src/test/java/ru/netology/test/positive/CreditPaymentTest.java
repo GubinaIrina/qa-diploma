@@ -56,6 +56,7 @@ public class CreditPaymentTest {
         assertEquals("APPROVED", DBUtils.getCreditStatus());
     }
 
+    //TODO: оплата не должна проходить
     @Test
     void notBuyATripDeclinedCard() throws SQLException {
         Card card = new Card(getDeclinedNumber(), getNextMonth(), getFutureYear(), getValidName(), getValidCVC());
