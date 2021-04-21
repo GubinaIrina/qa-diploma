@@ -37,7 +37,7 @@ public class PaymentTest {
 
     //Поле "Номер карты"
     @Test
-    void notBuyATripInvalidNumberCard () {
+    void notBuyATripInvalidNumberCard() {
         Card card = new Card(getInValidNumber(), getNextMonth(), getFutureYear(), getValidName(), getValidCVC());
         val paymentPage = new PaymentPage();
         paymentPage.fullData(card);
@@ -45,7 +45,7 @@ public class PaymentTest {
     }
 
     @Test
-    void notBuyATripShortCardNumber () {
+    void notBuyATripShortCardNumber() {
         Card card = new Card(getShortNumber(), getNextMonth(), getFutureYear(), getValidName(), getValidCVC());
         val paymentPage = new PaymentPage();
         paymentPage.fullData(card);
@@ -53,8 +53,8 @@ public class PaymentTest {
     }
 
     @Test
-    void notBuyATripEmptyCardNumber () {
-        Card card = new Card( "", getNextMonth(), getFutureYear(), getValidName(), getValidCVC());
+    void notBuyATripEmptyCardNumber() {
+        Card card = new Card("", getNextMonth(), getFutureYear(), getValidName(), getValidCVC());
         val paymentPage = new PaymentPage();
         paymentPage.fullData(card);
         paymentPage.getFieldRequiredNotification();
@@ -63,7 +63,7 @@ public class PaymentTest {
     //Поле "Месяц"
     //TODO: надпись под полем "Месяц" должно содержать текст: "Неверно указан срок действия карты"
     @Test
-    void notBuyInvalidMonth () {
+    void notBuyInvalidMonth() {
         Card card = new Card(getApprovedNumber(), "00", getFutureYear(), getValidName(), getValidCVC());
         val paymentPage = new PaymentPage();
         paymentPage.fullData(card);
@@ -72,7 +72,7 @@ public class PaymentTest {
 
     //TODO: Надпись под полем "Месяц" должно содержать текст: "Поле обязательно для заполнения"
     @Test
-    void notBuyEmptyMonth () {
+    void notBuyEmptyMonth() {
         Card card = new Card(getApprovedNumber(), "", getFutureYear(), getValidName(), getValidCVC());
         val paymentPage = new PaymentPage();
         paymentPage.fullData(card);
@@ -80,7 +80,7 @@ public class PaymentTest {
     }
 
     @Test
-    void notBuyCardExpired () {
+    void notBuyCardExpired() {
         Card card = new Card(getApprovedNumber(), getLastMonth(), getCurrentYear(), getValidName(), getValidCVC());
         val paymentPage = new PaymentPage();
         paymentPage.fullData(card);
@@ -89,7 +89,7 @@ public class PaymentTest {
 
     //Поле "Год"
     @Test
-    void notBuyLastYearCard () {
+    void notBuyLastYearCard() {
         Card card = new Card(getApprovedNumber(), getNextMonth(), getLastYear(), getValidName(), getValidCVC());
         val paymentPage = new PaymentPage();
         paymentPage.fullData(card);
@@ -98,7 +98,7 @@ public class PaymentTest {
 
     //TODO: Надпись под полем "Год" должна содержать текст "Поле обязательно для заполнения"
     @Test
-    void notBuyEmptyFieldYear () {
+    void notBuyEmptyFieldYear() {
         Card card = new Card(getApprovedNumber(), getNextMonth(), "", getValidName(), getValidCVC());
         val paymentPage = new PaymentPage();
         paymentPage.fullData(card);
@@ -106,27 +106,27 @@ public class PaymentTest {
     }
 
     //Поле "Владелец"
-    //TODO: оплата проходит, надпись под полем должна содержать текст "Введите полное имя и фамилию"
+    //TODO: Надпись под полем должна содержать текст "Введите полное имя и фамилию"
     @Test
-    void notBuyFieldCardHolderOnlyName () {
+    void notBuyFieldCardHolderOnlyName() {
         Card card = new Card(getApprovedNumber(), getNextMonth(), getFutureYear(), getOnlyName(), getValidCVC());
         val paymentPage = new PaymentPage();
         paymentPage.fullData(card);
         paymentPage.getFullNameNotification();
     }
 
-    //TODO: оплата проходит, ошибки нет
+    //TODO: Надпись под полем должна содержать текст "Введите полное имя и фамилию"
     @Test
-    void notBuyFieldCardHolderOnlySurnameInLatinLetters () {
+    void notBuyFieldCardHolderOnlySurnameInLatinLetters() {
         Card card = new Card(getApprovedNumber(), getNextMonth(), getFutureYear(), getOnlyLastNameInLatinLetters(), getValidCVC());
         val paymentPage = new PaymentPage();
         paymentPage.fullData(card);
         paymentPage.getFullNameNotification();
     }
 
-    //TODO: оплата проходит, ошибки нет
+    //TODO: Надпись под полем должна содержать текст "Неверный формат"
     @Test
-    void notBuyFirstNameAndLastNameAtHyphen () {
+    void notBuyFirstNameAndLastNameAtHyphen() {
         Card card = new Card(getApprovedNumber(), getNextMonth(), getFutureYear(), getOnlyName()
                 + "-" + getOnlyLastName(), getValidCVC());
         val paymentPage = new PaymentPage();
@@ -134,27 +134,27 @@ public class PaymentTest {
         paymentPage.getInvalidFormatNotification();
     }
 
-    //TODO: оплата проходит, ошибки нет
+    //TODO: Надпись под полем должна содержать текст "Значение поля не может содержать более 100 символов"
     @Test
-    void notBuyCardHolderNameMore100Letters () {
+    void notBuyCardHolderNameMore100Letters() {
         Card card = new Card(getApprovedNumber(), getNextMonth(), getFutureYear(), getLongName(), getValidCVC());
         val paymentPage = new PaymentPage();
         paymentPage.fullData(card);
         paymentPage.getFieldSymbolRestrictionNotification();
     }
 
-    //TODO: оплата проходит, ошибки нет
+    //TODO: Надпись под полем должна содержать текст "Значение поля может содержать только буквы и дефис"
     @Test
-    void notBuyCardHolderNameNumbersInsteadLetters () {
+    void notBuyCardHolderNameNumbersInsteadLetters() {
         Card card = new Card(getApprovedNumber(), getNextMonth(), getFutureYear(), getNameWithNumber(), getValidCVC());
         val paymentPage = new PaymentPage();
         paymentPage.fullData(card);
         paymentPage.getFieldCanOnlyContainLettersNotification();
     }
 
-    //TODO: оплата проходит, ошибки нет
+    //TODO: Надпись под полем должна содержать текст "Значение поля должно содержать больше одной буквы"
     @Test
-    void notBuyCardHolderNameOneLetter () {
+    void notBuyCardHolderNameOneLetter() {
         Card card = new Card(getApprovedNumber(), getNextMonth(), getFutureYear(),
                 getNameWithOneLetter(), getValidCVC());
         val paymentPage = new PaymentPage();
@@ -162,9 +162,9 @@ public class PaymentTest {
         paymentPage.getFieldMustContainMoreThanOneLetterNotification();
     }
 
-    //TODO: оплата проходит, ошибки нет
+    //TODO: Надпись под полем должна содержать текст "Значение поля может содержать только буквы и дефис"
     @Test
-    void notBuyCardHolderNameSpanInsteadLastName () {
+    void notBuyCardHolderNameSpanInsteadName() {
         Card card = new Card(getApprovedNumber(), getNextMonth(), getFutureYear(),
                 getOnlyName() + " ", getValidCVC());
         val paymentPage = new PaymentPage();
@@ -173,7 +173,7 @@ public class PaymentTest {
     }
 
     @Test
-    void notBuyEmptyFieldCardHolderName () {
+    void notBuyEmptyFieldCardHolderName() {
         Card card = new Card(getApprovedNumber(), getNextMonth(), getFutureYear(), "", getValidCVC());
         val paymentPage = new PaymentPage();
         paymentPage.fullData(card);
@@ -181,7 +181,7 @@ public class PaymentTest {
     }
 
     //Поле "CVC/CVV"
-    //TODO: не та ошибка
+    //TODO: Надпись под полем должна содержать текст "Значение поля должно содержать 3 цифры"
     @Test
     void notBuyFieldCVCOneNumber() {
         Card card = new Card(getApprovedNumber(), getNextMonth(), getFutureYear(),
@@ -191,7 +191,7 @@ public class PaymentTest {
         paymentPage.getFieldMustContainThreeDigitNotification();
     }
 
-    //TODO: не та ошибка
+    //TODO: Надпись под полем должна содержать текст "Значение поля должно содержать 3 цифры"
     @Test
     void notBuyFieldCVCTwoNumber() {
         Card card = new Card(getApprovedNumber(), getNextMonth(), getFutureYear(),
@@ -201,7 +201,8 @@ public class PaymentTest {
         paymentPage.getFieldMustContainThreeDigitNotification();
     }
 
-    //TODO: не та ошибка, доп ошибка в поле Владелец
+    //TODO: Надпись под полем должна содержать текст "Поле обязательно для заполнения",
+    // дополнительно ошибочным подсвечено поле "Владелец"
     @Test
     void notBuyEmptyFieldCVC() {
         Card card = new Card(getApprovedNumber(), getNextMonth(), getFutureYear(),
@@ -212,7 +213,7 @@ public class PaymentTest {
     }
 
     //Пустая заявка
-    //TODO: все поля, кроме Владелец подсвечены не той ошибкой
+    //TODO: Под каждым полем должна быть надпись "Поле обязательно для заполнения"
     @Test
     void notBuyEmptyApplication() {
         Card card = new Card();

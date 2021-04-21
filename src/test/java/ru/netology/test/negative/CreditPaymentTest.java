@@ -103,7 +103,7 @@ public class CreditPaymentTest {
     }
 
     //Поле "Владелец"
-    //TODO: оплата проходит, ошибки нет
+    //TODO: Надпись под полем должна содержать текст "Введите полное имя и фамилию"
     @Test
     void notBuyFieldCardHolderOnlyNameInLatinaLetter() {
         Card card = new Card(getApprovedNumber(), getNextMonth(), getFutureYear(), getOnlyNameInLatinLetters(), getValidCVC());
@@ -112,7 +112,7 @@ public class CreditPaymentTest {
         paymentPage.getFullNameNotification();
     }
 
-    //TODO: оплата проходит, ошибки нет
+    //TODO: Надпись под полем должна содержать текст "Введите полное имя и фамилию"
     @Test
     void notBuyFieldCardHolderOnlySurname() {
         Card card = new Card(getApprovedNumber(), getNextMonth(), getFutureYear(), getOnlyLastName(), getValidCVC());
@@ -121,7 +121,7 @@ public class CreditPaymentTest {
         paymentPage.getFullNameNotification();
     }
 
-    //TODO: оплата проходит, ошибки нет
+    //TODO: Надпись под полем должна содержать текст "Неверный формат"
     @Test
     void notBuyFirstNameAndLastNameAtHyphen() {
         Card card = new Card(getApprovedNumber(), getNextMonth(), getFutureYear(), getOnlyName()
@@ -131,7 +131,7 @@ public class CreditPaymentTest {
         paymentPage.getInvalidFormatNotification();
     }
 
-    //TODO: оплата проходит, ошибки нет
+    //TODO: Надпись под полем должна содержать текст "Значение поля не может содержать более 100 символов"
     @Test
     void notBuyCardHolderNameMore100Letters() {
         Card card = new Card(getApprovedNumber(), getNextMonth(), getFutureYear(), getLongName(), getValidCVC());
@@ -140,7 +140,7 @@ public class CreditPaymentTest {
         paymentPage.getFieldSymbolRestrictionNotification();
     }
 
-    //TODO: оплата проходит, ошибки нет
+    //TODO: Надпись под полем должна содержать текст "Значение поля может содержать только буквы и дефис"
     @Test
     void notBuyCardHolderNameNumbersInsteadLetters() {
         Card card = new Card(getApprovedNumber(), getNextMonth(), getFutureYear(), getNameWithNumber(), getValidCVC());
@@ -149,7 +149,7 @@ public class CreditPaymentTest {
         paymentPage.getFieldCanOnlyContainLettersNotification();
     }
 
-    //TODO: оплата проходит, ошибки нет
+    //TODO: Надпись под полем должна содержать текст "Значение поля должно содержать больше одной буквы"
     @Test
     void notBuyCardHolderNameOneLetter() {
         Card card = new Card(getApprovedNumber(), getNextMonth(), getFutureYear(),
@@ -159,24 +159,16 @@ public class CreditPaymentTest {
         paymentPage.getFieldMustContainMoreThanOneLetterNotification();
     }
 
-    //TODO: не та ошибка
+    //TODO: Надпись под полем должна содержать текст "Значение поля может содержать только буквы и дефис"
     @Test
-    void notBuyCardHolderNameSpace() {
-        Card card = new Card(getApprovedNumber(), getNextMonth(), getFutureYear(), " ", getValidCVC());
+    void notBuyCardHolderNameSpanInsteadLastName() {
+        Card card = new Card(getApprovedNumber(), getNextMonth(), getFutureYear(), " " +
+                getOnlyLastName(), getValidCVC());
         val paymentPage = new PaymentPage();
         paymentPage.fullData(card);
         paymentPage.getFieldCanOnlyContainLettersNotification();
     }
 
-    //TODO: оплата проходит, ошибки нет
-    @Test
-    void notBuyCardHolderNameSpanInsteadName() {
-        Card card = new Card(getApprovedNumber(), getNextMonth(), getFutureYear(),
-                " " + getOnlyLastName(), getValidCVC());
-        val paymentPage = new PaymentPage();
-        paymentPage.fullData(card);
-        paymentPage.getFieldCanOnlyContainLettersNotification();
-    }
 
     @Test
     void notBuyEmptyFieldCardHolderName() {
@@ -187,7 +179,7 @@ public class CreditPaymentTest {
     }
 
     //Поле "CVC/CVV"
-    //TODO: не та ошибка
+    //TODO: Надпись под полем должна содержать текст "Значение поля должно содержать 3 цифры"
     @Test
     void notBuyFieldCVCOneNumber() {
         Card card = new Card(getApprovedNumber(), getNextMonth(), getFutureYear(),
@@ -197,7 +189,7 @@ public class CreditPaymentTest {
         paymentPage.getFieldMustContainThreeDigitNotification();
     }
 
-    //TODO: не та ошибка
+    //TODO: Надпись под полем должна содержать текст "Значение поля должно содержать 3 цифры"
     @Test
     void notBuyFieldCVCTwoNumber() {
         Card card = new Card(getApprovedNumber(), getNextMonth(), getFutureYear(),
@@ -207,7 +199,8 @@ public class CreditPaymentTest {
         paymentPage.getFieldMustContainThreeDigitNotification();
     }
 
-    //TODO: не та ошибка, доп ошибка в поле Владелец
+    //TODO: Надпись под полем должна содержать текст "Поле обязательно для заполнения",
+    // дополнительно ошибочным подсвечено поле "Владелец"
     @Test
     void notBuyEmptyFieldCVC() {
         Card card = new Card(getApprovedNumber(), getNextMonth(), getFutureYear(),
@@ -217,7 +210,7 @@ public class CreditPaymentTest {
         paymentPage.getFieldRequiredNotification();
     }
 
-    //TODO: все поля, кроме Владелец подсвечены не той ошибкой
+    //TODO: Под каждым полем должна быть надпись "Поле обязательно для заполнения"
     @Test
     void notBuyEmptyApplication() {
         Card card = new Card();
